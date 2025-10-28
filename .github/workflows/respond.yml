@@ -15,7 +15,7 @@ permissions: {}
 jobs:
   respond:
     name: Respond
-    uses: bitwarden/gh-actions/.github/workflows/_respond.yml@main
+    uses: c53-oskar/actions-tests/.github/workflows/_respond.yml@main
     secrets:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
