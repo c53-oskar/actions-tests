@@ -1,3 +1,3 @@
 # actions-tests
 
-foobar
+foobarbaz
