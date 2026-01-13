@@ -1,0 +1,43 @@
+name: Publish Release
+run-name: ${{ github.event.pull_request.head.ref }}
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  publish:
+    if: github.event.pull_request.merged && startsWith(github.event.pull_request.head.ref, 'release/')
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.version }}
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v5
+      with:
+        ref: ${{ github.event.pull_request.merge_commit_sha }}
+        fetch-depth: 0
+        fetch-tags: true
+
+    - name: Tag release
+      run: |
+        # Set up github-actions[bot] user
+        git config --local user.name "github-actions[bot]"
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        # Get the version from the branch name
+        branch="${{ github.event.pull_request.head.ref }}"
+        version="${branch#release/}"
+        echo ${version}
+
+        # Tag and create release
+        git tag -a "${version}" -m "Release ${version}"
+        echo "version=${version}" >> $GITHUB_OUTPUT
+      id: tag
