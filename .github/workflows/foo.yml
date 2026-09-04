@@ -1,0 +1,10 @@
+name: foo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  foo:
+    name: foo
+    steps:
+      - run: curl -v --max-time 15 https://jenkins.mentionme.tech
