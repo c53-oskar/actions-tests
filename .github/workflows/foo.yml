@@ -5,7 +5,7 @@ on:
 
 jobs:
   foo:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     name: foo
     steps:
       - run: curl -v --max-time 15 https://jenkins.mentionme.tech
