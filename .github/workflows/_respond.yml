@@ -15,7 +15,7 @@ permissions: {}
 jobs:
   validation:
     name: Validation
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     outputs:
@@ -66,7 +66,7 @@ jobs:
 
   comment:
     name: Claude comment
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: validation
     if: needs.validation.outputs.should_comment == 'true'
     permissions:
